@@ -22,7 +22,9 @@ const giveToPlayer = (player, good) => {
 export const take = (player, gameState) => {
   if (player.hand.length > 6) {
     console.log("Your hand is full, try exchange or sell");
-    return chooseAction();
+    const action = chooseAction();
+    action(player, gameState);
+    return;
   }
   const item = prompt("Select good to take from market");
   if (!gameState.market.includes(item)) {
