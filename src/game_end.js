@@ -5,6 +5,7 @@ export const are3CoinColorsFinished = (goods) => {
     (count, { coins }) => (!coins.length) ? ++count : count,
     0,
   );
+  console.log(emptyCoins);
 
   return emptyCoins >= 3;
 };
@@ -17,10 +18,25 @@ export const assignCamelToken = (players) => {
   players[playerWithMoreCamels].points += 5;
 };
 
-export const assignSealOfExcellence = (players) => {
-  const playerWithMorePoints = players[0].points > players[1].points
-    ? 0
-    : 1;
+export const assignSealOfExcellence = (winner) =>
+  winner.sealOfExcellenceCount++;
 
-  players[playerWithMorePoints].sealOfExcellenceCount++;
-}
+const highScorePlayerOf = (players) =>
+  players[0].points > players[1].points ? players[0] : players[1];
+
+const displayMessage = (winner) => {
+  const message =
+    `Hurray!!!!${winner.name}, you WON.\n with score ${winner.points}`;
+  console.log(message);
+};
+
+export const winnerAmong = (players) => {
+  assignCamelToken(gameState.players);
+  const winner = highScorePlayerOf(players);
+  assignSealOfExcellence(winner);
+
+  displayMessage(winner);
+};
+
+export const isGameEnded = (deck, goods) =>
+  isDeckEmpty(deck) || are3CoinColorsFinished(goods);

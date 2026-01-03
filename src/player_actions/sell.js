@@ -20,16 +20,16 @@ const getBonus = (bonusTokens, count) => {
 
 export const sellGoods = (
   player,
-  { goodsMap, bonus },
+  { goods, bonus },
 ) => {
   const input = prompt("what do you wanna sell and how many...?");
   const [good, count] = input.trim().split(/ +/);
   if (!isValidRequest(player.hand, good, count)) {
     console.log("invalid input, Try again");
-    return sellGoods(player, goodsMap, bonus);
+    return sellGoods(player, goods, bonus);
   }
   RemoveGoods(player.hand, good, count);
   const bonusCoin = getBonus(bonus, count);
   return player.points +=
-    goodsMap[good].coins.splice(0, count).reduce((x, y) => x + y) + bonusCoin;
+    goods[good].coins.splice(0, count).reduce((x, y) => x + y) + bonusCoin;
 };

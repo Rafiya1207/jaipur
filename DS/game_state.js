@@ -54,7 +54,7 @@ export const gameState = {
     "m",
   ],
   market: ["m", "m", "m"],
-  goodsMap: {
+  goods: {
     r: { symbol: "♦️ ", count: 6, goodName: "ruby", coins: [7, 7, 5, 5, 5] },
     g: { symbol: "⚱️ ", count: 6, goodName: "gold", coins: [6, 6, 5, 5, 5] },
     v: { symbol: "🪙 ", count: 6, goodName: "silver", coins: [5, 5, 5, 5, 5] },
@@ -76,7 +76,7 @@ export const gameState = {
       goodName: "leather",
       coins: [4, 3, 2, 1, 1, 1, 1, 1, 1],
     },
-    m: { symbol: "🐪 ", count: 8, goodName: "camels" },
+    m: { symbol: "🐪 ", count: 8, goodName: "camels", coins:[5] },
   },
   bonus: {
     3: [1, 1, 2, 2, 2, 3, 3],
@@ -85,6 +85,7 @@ export const gameState = {
   },
   players: [
     {
+      playerId: 1,
       playerName: "",
       herd: [],
       hand: [],
@@ -92,6 +93,7 @@ export const gameState = {
       sealOfExcellenceCount: 0,
     },
     {
+      playerId: 2,
       playerName: "",
       herd: [],
       hand: [],
