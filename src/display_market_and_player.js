@@ -1,8 +1,7 @@
-export const displayMarket = ({ market }) => {
+export const displayMarket = (market) => {
   const marketInfo = `  Market Goods
   ${market.join(" ")}
-  ${[0, 1, 2, 3, 4].join(" ")} \n\n`;
-
+`;
   console.log(marketInfo);
 };
 
@@ -13,4 +12,20 @@ herd = ${player.herd}
 points = ${player.points}
 `;
   console.log(playerInfo);
+};
+
+const displayActions = () => {
+  console.log(
+    `Available actions
+  1. take
+  2. exchange
+  3. sell`,
+  );
+};
+
+export const display = ({ market, player }) => {
+  console.clear();
+  displayMarket(market);
+  displayPlayer(player);
+  displayActions();
 };

@@ -22,14 +22,17 @@ export const sellGoods = (
   player,
   { goods, bonus },
 ) => {
-  const input = prompt("what do you wanna sell and how many...?");
-  const [good, count] = input.trim().split(/ +/);
+  const good = prompt("Enter the good you want to sell");
+  const count = parseInt(prompt("Enter the number of good"));
+
   if (!isValidRequest(player.hand, good, count)) {
     console.log("invalid input, Try again");
     return sellGoods(player, goods, bonus);
   }
   RemoveGoods(player.hand, good, count);
   const bonusCoin = getBonus(bonus, count);
-  return player.points +=
-    goods[good].coins.splice(0, count).reduce((x, y) => x + y) + bonusCoin;
+  player.points += goods[good].coins.splice(0, count).reduce((x, y) => x + y) +
+    bonusCoin;
+
+  console.log(`you got ${player.points} points`);
 };

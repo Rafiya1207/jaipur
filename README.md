@@ -1,2 +1,2 @@
-- sell code
-- 
+- if input is invalid, provide change option for player durring taking and selling.
+- manual

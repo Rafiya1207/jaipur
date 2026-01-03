@@ -1,4 +1,5 @@
 import { withoutAll } from "jsr:@std/collections";
+import { chooseAction } from "./actions";
 
 const takeFromPlayer = (playerCards, player) => {
   const hand = player.hand;
@@ -129,9 +130,9 @@ const getMarketCards = (market, playerCards, hand, herd) => {
 
   if (!areValidMarketCards(market, cardsOfMarket, playerCards)) {
     const response = confirm("Do you want to exchange ?");
-    if(response) {
-      playerCards = getPlayerCards(market,hand,herd);
-      return getMarketCards(market,playerCards,hand,herd);
+    if (response) {
+      playerCards = getPlayerCards(market, hand, herd);
+      return getMarketCards(market, playerCards, hand, herd);
     } else {
       cardsOfMarket = [];
     }
@@ -141,17 +142,17 @@ const getMarketCards = (market, playerCards, hand, herd) => {
 
 export const exchange = (player, gameState) => {
   const market = gameState.market;
-  console.log(`
-    Market : ${market}\n
-    Hand : ${player.hand}
-    Herd : ${player.herd}`);
 
   const playerCard = getPlayerCards(market, player.hand, player.herd);
-  const [playerCards, marketCards] = getMarketCards(market,playerCard,player.hand,player.herd);
-    if (marketCards.length < 1) {
-      console.log("choose other option");
-      return; // returns to the main function so that player can change functionality option from exchange to other
-    }
-    const tempCards = takeFromPlayer(playerCards, player);
-    return swapCards(tempCards, marketCards, market, player);
+  const [playerCards, marketCards] = getMarketCards(
+    market,
+    playerCard,
+    player.hand,
+    player.herd,
+  );
+  if (marketCards.length < 1) {
+    return chooseAction(); // returns to the main function so that player can change functionality option from exchange to other
+  }
+  const tempCards = takeFromPlayer(playerCards, player);
+  swapCards(tempCards, marketCards, market, player);
 };

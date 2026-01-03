@@ -12,17 +12,20 @@ export const fillMarket = ({ market, deck }) => {
   return market;
 };
 
+const validateAction = (userInput) => {
+  let action = parseInt(userInput);
+
+  if (![1, 2, 3].includes(action)) {
+    action = prompt("Enter valid action number");
+    return validateAction(action);
+  }
+  return action;
+};
+
 export const chooseAction = () => {
   const marketFns = [take, exchange, sellGoods];
-  const promptMessage = `Available actions
-  1. take
-  2. exchange
-  3. sell
-Choose action number`;
-  const action = parseInt(prompt(promptMessage));
-  if (![1, 2, 3].includes(action)) {
-    console.log("Enter valid action number");
-    return chooseAction();
-  }
+  
+  const action = validateAction(prompt('Enter action(number): '));
+
   return marketFns[action - 1];
 };
