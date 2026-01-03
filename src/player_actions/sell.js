@@ -9,13 +9,12 @@ const RemoveGoods = (hand, good, count) => {
   }
 };
 
-const getBonus = (bonusTokens, count) => {
+const getBonus = (bonusTokens, count, tokens) => {
   if (count < 3) {
-    return 0;
+    return;
   }
   count > 5 && (count = 5);
-  return bonusTokens[count].pop() || bonusTokens[count - 1].pop() ||
-    bonusTokens[count - 2].pop();
+  return tokens.push(bonusTokens[count].pop());
 };
 
 export const sellGoods = (
@@ -24,15 +23,12 @@ export const sellGoods = (
 ) => {
   const good = prompt("Enter the good you want to sell");
   const count = parseInt(prompt("Enter the number of good"));
-
   if (!isValidRequest(player.hand, good, count)) {
     console.log("invalid input, Try again");
     return sellGoods(player, goods, bonus);
   }
   RemoveGoods(player.hand, good, count);
-  const bonusCoin = getBonus(bonus, count);
-  player.points += goods[good].coins.splice(0, count).reduce((x, y) => x + y) +
-    bonusCoin;
-
-  console.log(`you got ${player.points} points`);
+  player.goodsCoins.push(...goods[good].splice(0, count));
+  getBonus(bonus, count, player.bonusTokens);
+  console.log(`successfully sold`);
 };
