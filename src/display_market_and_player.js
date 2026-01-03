@@ -23,7 +23,7 @@ const displayActions = () => {
   );
 };
 
-export const display = ({ market, player }) => {
+export const display = ({ market }, player) => {
   console.clear();
   displayMarket(market);
   displayPlayer(player);
