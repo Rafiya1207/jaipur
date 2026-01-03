@@ -2,4 +2,6 @@
 - tie - player with most bonus tokens will win.
   - change players structure to keep track of goods, bonus, seperately.
   - calculate the final score at the end.
+
+- no camel exchange
 - manual

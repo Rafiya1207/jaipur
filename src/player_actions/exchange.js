@@ -151,7 +151,8 @@ export const exchange = (player, gameState) => {
     player.herd,
   );
   if (marketCards.length < 1) {
-    return chooseAction(); // returns to the main function so that player can change functionality option from exchange to other
+    const action = chooseAction();
+    return action(player, gameState); // returns to the main function so that player can change functionality option from exchange to other
   }
   const tempCards = takeFromPlayer(playerCards, player);
   swapCards(tempCards, marketCards, market, player);
