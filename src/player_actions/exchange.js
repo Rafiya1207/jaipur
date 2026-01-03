@@ -1,5 +1,5 @@
 import { withoutAll } from "jsr:@std/collections";
-import { chooseAction } from "./actions";
+import { chooseAction } from "./actions.js";
 
 const takeFromPlayer = (playerCards, player) => {
   const hand = player.hand;

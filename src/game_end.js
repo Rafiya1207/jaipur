@@ -1,3 +1,5 @@
+import { sumOf } from "jsr:@std/collections";
+
 export const isDeckEmpty = (deck) => !deck.length;
 
 export const are3CoinColorsFinished = (goods) => {
@@ -21,8 +23,11 @@ export const assignCamelToken = (players) => {
 export const assignSealOfExcellence = (winner) =>
   winner.sealOfExcellenceCount++;
 
-const highScorePlayerOf = (players) =>
-  players[0].points > players[1].points ? players[0] : players[1];
+const highScorePlayerOf = ([player1, player2]) => {
+  const player1Points = sumOf([...player1.goodsCoins, ...player1.bonusCoins], x => x)
+  const player2Points = sumOf([...player2.goodsCoins, ...player2.bonusCoins], x => x)
+  return player1Points > player2Points ? player1 : player2;
+}
 
 const displayMessage = (winner) => {
   const message =
