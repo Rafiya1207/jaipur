@@ -9,7 +9,7 @@ export const runGame = (gameState) => {
 
   while (!isGameEnded(gameState.deck, gameState.goods)) {
     const player = gameState.players[currentPlayer];
-    display(gameState);
+    display(gameState, player);
 
     const action = chooseAction();
     action(player, gameState);
