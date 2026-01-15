@@ -66,7 +66,7 @@ const doContainFromExistings = (inputCards, existingCards) => {
   );
 };
 
-const areValidPlayerCards = (playerCards, hand, herd) => {
+const areValidPlayerCards = (playerCards, hand, herd, market) => {
   if (playerCards.length < 2) {
     console.log("Please Enter more than or equals to 2 cards!!!");
     return false;
@@ -99,7 +99,7 @@ const getPlayerCards = (market, hand, herd) => {
   ); //supposed seperated by ","
   const playerCards = cardsFromPlayer.split(",");
 
-  if (!areValidPlayerCards(playerCards, hand, herd)) {
+  if (!areValidPlayerCards(playerCards, hand, herd, market)) {
     return getPlayerCards(market, hand, herd);
   }
   return playerCards;

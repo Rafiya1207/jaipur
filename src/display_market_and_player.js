@@ -9,7 +9,6 @@ export const displayPlayer = (player) => {
   const playerInfo = `Current player = ${player.playerName}
 hand = ${player.hand}
 herd = ${player.herd}
-points = ${player.points}
 `;
   console.log(playerInfo);
 };
