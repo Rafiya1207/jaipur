@@ -12,22 +12,32 @@ export const are3CoinColorsFinished = (goods) => {
   return emptyCoins >= 3;
 };
 
-export const assignCamelToken = (players) => {
-  const playerWithMoreCamels = players[0].herd.length > players[1].herd.length
-    ? 0
-    : 1;
+export const assignCamelToken = ([player1, player2]) => {
+  if (player1.herd.length === player2.herd.length) {
+    return;
+  }
+  const playerWithMoreCamels = Math.max(
+    player1.herd.length,
+    player2.herd.length,
+  );
 
-  players[playerWithMoreCamels].points += 5;
+  playerWithMoreCamels.points += 5;
 };
 
 export const assignSealOfExcellence = (winner) =>
   winner.sealOfExcellenceCount++;
 
 const highScorePlayerOf = ([player1, player2]) => {
-  const player1Points = sumOf([...player1.goodsCoins, ...player1.bonusCoins], x => x)
-  const player2Points = sumOf([...player2.goodsCoins, ...player2.bonusCoins], x => x)
+  const player1Points = sumOf(
+    [...player1.goodsCoins, ...player1.bonusCoins],
+    (x) => x,
+  );
+  const player2Points = sumOf(
+    [...player2.goodsCoins, ...player2.bonusCoins],
+    (x) => x,
+  );
   return player1Points > player2Points ? player1 : player2;
-}
+};
 
 const displayMessage = (winner) => {
   const message =
