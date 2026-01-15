@@ -26,7 +26,12 @@ export const take = (player, gameState) => {
     action(player, gameState);
     return;
   }
-  const item = prompt("Select good to take from market");
+  const item = prompt("Select good to take from market: ");
+  if(item === "actions") {
+    // const action = chooseAction();
+    chooseAction()(player, gameState);
+    return;
+  }
   if (item.length > 1) {
     console.log("enter only one item");
     return take(player, gameState);
