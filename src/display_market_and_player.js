@@ -15,10 +15,11 @@ herd = ${player.herd}
 
 const displayActions = () => {
   console.log(
-    `Available actions
+`Available actions
   1. take
   2. exchange
-  3. sell`,
+  3. sell
+enter "actions" to get above actions`,
   );
 };
 
