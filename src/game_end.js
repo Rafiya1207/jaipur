@@ -26,23 +26,27 @@ export const assignSealOfExcellence = (winner) =>
   winner.sealOfExcellenceCount++;
 
 const highScorePlayerOf = ([player1, player2]) => {
-  const player1Points = sumOf(
+  player1.points += sumOf(
     [...player1.goodsCoins, ...player1.bonusCoins],
     (x) => x,
   );
-  const player2Points = sumOf(
+  player2.points += sumOf(
     [...player2.goodsCoins, ...player2.bonusCoins],
     (x) => x,
   );
 
-  if (player1Points === player2Points) {
-    if (player1.bonusCoins.length === player2.bonusCoins.length) return;
+  if (player1.points === player2.points) {
+    if (player1.bonusCoins.length === player2.bonusCoins.length) {
+      return player1.goodsCoins.length > player2.goodsCoins.length
+        ? player1
+        : player2;
+    }
 
     return player1.bonusCoins.length > player2.bonusCoins.length
       ? player1
       : player2;
   }
-  return player1Points > player2Points ? player1 : player2;
+  return player1.points > player2.points ? player1 : player2;
 };
 
 const displayMessage = (message) => {
@@ -50,7 +54,7 @@ const displayMessage = (message) => {
 };
 
 export const winnerAmong = (players) => {
-  assignCamelToken(gameState.players);
+  assignCamelToken(players);
   const winner = highScorePlayerOf(players);
 
   if (!winner) {
@@ -60,7 +64,7 @@ export const winnerAmong = (players) => {
   assignSealOfExcellence(winner);
 
   displayMessage(
-    `Hurray!!!!${winner.name}, you WON.\n with score ${winner.points}`,
+    `Hurray!!!! ${winner.playerName}, you WON.\nwith score ${winner.points}`,
   );
 };
 

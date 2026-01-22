@@ -27,7 +27,10 @@ const swapCards = (temp, marketCards, market, player) => {
 };
 
 const isEnoughAvailableCards = (market, playerCards) => {
-  const differentFromPlayerCardsInMarket = withoutAll(market, [...playerCards,"m"]);
+  const differentFromPlayerCardsInMarket = withoutAll(market, [
+    ...playerCards,
+    "m",
+  ]);
   return (differentFromPlayerCardsInMarket.length >= playerCards.length);
 };
 
@@ -97,6 +100,9 @@ const getPlayerCards = (market, hand, herd) => {
   const cardsFromPlayer = prompt(
     "Enter the cards you want to exchange from your hand (separated by ','): ",
   ); //supposed seperated by ","
+  if(cardsFromPlayer === "actions"){
+    return cardsFromPlayer;
+  }
   const playerCards = cardsFromPlayer.split(",");
 
   if (!areValidPlayerCards(playerCards, hand, herd, market)) {
@@ -109,7 +115,7 @@ const doIntersect = (marketCards, playerCards) =>
   marketCards.some((card) => playerCards.includes(card));
 
 const areValidMarketCards = (market, marketCards, playerCards) => {
-  if(marketCards.includes("m")) {
+  if (marketCards.includes("m")) {
     console.log("You can't exchange camel from market");
     return false;
   }
@@ -134,6 +140,11 @@ const areValidMarketCards = (market, marketCards, playerCards) => {
 
 const getMarketCards = (market, playerCards, hand, herd) => {
   const cardsFromMarket = prompt("Enter the cards you want from market : ");
+
+  if(cardsFromMarket === "actions"){
+    return [playerCards, cardsFromMarket];
+  }
+  
   let cardsOfMarket = cardsFromMarket.split(",");
 
   if (!areValidMarketCards(market, cardsOfMarket, playerCards)) {
@@ -151,20 +162,28 @@ const getMarketCards = (market, playerCards, hand, herd) => {
 export const exchange = (player, gameState) => {
   const market = gameState.market;
 
-  if(withoutAll(market,["m"]).length < 2) {
-    console.log("There are less than 2 goods cards\nExchange is not possible!!!");
+  if (withoutAll(market, ["m"]).length < 2) {
+    console.log(
+      "There are less than 2 goods cards\nExchange is not possible!!!",
+    );
     const action = chooseAction();
     return action(player, gameState);
   }
 
   const playerCard = getPlayerCards(market, player.hand, player.herd);
+
+  if(playerCard === "actions") {
+    const action = chooseAction();
+    return action(player, gameState);
+  }
+
   const [playerCards, marketCards] = getMarketCards(
     market,
     playerCard,
     player.hand,
     player.herd,
   );
-  if (marketCards.length < 1) {
+  if (marketCards === "actions" || marketCards.length < 1) {
     const action = chooseAction();
     return action(player, gameState); // returns to the main function so that player can change functionality option from exchange to other
   }
