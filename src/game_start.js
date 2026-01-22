@@ -19,6 +19,6 @@ export const runGame = (gameState) => {
     prompt("Go to next player, press enter");
     currentPlayer = 1 - currentPlayer;
   }
-
+console.log("after loop");
   winnerAmong(gameState.players);
 };
