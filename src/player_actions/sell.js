@@ -33,6 +33,6 @@ export const sellGoods = (
   }
   RemoveGoods(player.hand, good, count);
   player.goodsCoins.push(...goods[good].coins.splice(0, count));
-  getBonus(bonus, count, player.bonusTokens);
+  getBonus(bonus, count, player.bonusCoins);
   console.log(`successfully sold`);
 };
