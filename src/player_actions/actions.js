@@ -5,7 +5,7 @@ import { sellGoods } from "./sell.js";
 export const fillMarket = ({ market, deck }) => {
   if (deck.length < 1) return market;
 
-  while (market.length < 5 || deck.length !== 0) {
+  while (market.length < 5 && deck.length !== 0) {
     const good = deck.pop();
     if (good) market.push(good);
   }
