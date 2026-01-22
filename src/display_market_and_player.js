@@ -1,6 +1,18 @@
+import { gameState } from "../DS/game_state.js";
+
+const makeEmojiMarket = (market) => {
+  const emojiMarket = [];
+  for (const item of market) {
+    emojiMarket.push(gameState.goods[item].symbol);
+  }
+  return emojiMarket.join("");
+};
+
 export const displayMarket = (market) => {
+  const emojiMarket = makeEmojiMarket(market);
   const marketInfo = `  Market Goods
-  ${market.join(" ")}
+  ${emojiMarket}
+  ${market.join("  ")}
 `;
   console.log(marketInfo);
 };
@@ -18,7 +30,8 @@ const displayActions = () => {
     `Available actions
   1. take
   2. exchange
-  3. sell`,
+  3. sell
+enter "actions" to get above actions`,
   );
 };
 
